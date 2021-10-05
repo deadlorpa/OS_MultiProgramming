@@ -92,7 +92,7 @@ namespace os_multiprogramming
             if (log)
             {
                 if(durationIO > 0)
-                    info += "|\t" + (durationIO / GlobalVars.PROCESSOR_TICK).ToString() + "\t"; 
+                    info += "|\t" + (durationIO / GlobalVars.PROCESSOR_TICK).ToString() + "c\t"; 
                 else
                     info += "|\tне зарегистрировано I/O\t";
             }
@@ -101,7 +101,7 @@ namespace os_multiprogramming
                 if (state == GlobalVars.TaskStates.COMPLETE)
                 {
 
-                    info += "|\t" + complete.ToString() + "с\t";
+                    info += "|\t" + complete.ToString() + "\t";
                 }
                 else
                 {

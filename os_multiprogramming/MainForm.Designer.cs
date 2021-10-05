@@ -204,7 +204,7 @@ namespace os_multiprogramming
             // 
             // chartProc
             // 
-            chartArea1.AxisX.Title = "Длительность всех IO";
+            chartArea1.AxisX.Title = "Очередной выполненный процесс";
             chartArea1.AxisY.Title = "Время выполнения";
             chartArea1.Name = "ChartArea1";
             this.chartProc.ChartAreas.Add(chartArea1);
@@ -214,7 +214,7 @@ namespace os_multiprogramming
             this.chartProc.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             this.tableLayoutPanel1.SetRowSpan(this.chartProc, 6);
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.LabelBackColor = System.Drawing.Color.White;
             series1.LabelBorderColor = System.Drawing.Color.White;
             series1.Name = "Process";
