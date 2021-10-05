@@ -82,10 +82,10 @@ namespace os_multiprogramming
         public string getDumpInfo()
         {
             string info = "";
-            info += "\t"+ born.ToString() + "\t: ";
-            info += "|\t" + state.ToString() + "\t: ";
-            info += "|\t" + (reservedDuration / GlobalVars.PROCESSOR_TICK).ToString() + "\t: ";
-            info += "|\t" + (duration / GlobalVars.PROCESSOR_TICK).ToString() + "\t: ";
+            info += born.ToString() + "\t";
+            info += "|\t" + state.ToString() + "\t";
+            info += "|\t" + (reservedDuration / GlobalVars.PROCESSOR_TICK).ToString() + "\t";
+            info += "|\t" + (duration / GlobalVars.PROCESSOR_TICK).ToString() + "\t";
 
             if (listDurationIO.Count() > 0)
             {
@@ -94,11 +94,11 @@ namespace os_multiprogramming
                 {
                     info += (i / GlobalVars.PROCESSOR_TICK).ToString() + ' ';
                 }
-                info+= "\t: ";
+                info+= "\t";
             }
             else
             {
-                info += "|\tне зарегистрировано I/O\t: ";
+                info += "|\tне зарегистрировано I/O\t";
             }
             return info;
         }

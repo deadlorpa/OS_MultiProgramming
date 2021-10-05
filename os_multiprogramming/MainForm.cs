@@ -173,13 +173,13 @@ namespace os_multiprogramming
             using (var sw = new StreamWriter(filename))
             {
                 sw.WriteLine("Выполненные процессы:");
-                sw.WriteLine("\tborn\t|\tstate\t|\tduration\t|\tlast duration\t|\ti/o\t|");
+                sw.WriteLine("\tborn\t\t\tstate\t\t\tduration\tlast duration\t\t\ti/o");
                 foreach (MyTask task in taskQueqe.tasksCompleted)
                 {
                     sw.WriteLine(task.getDumpInfo());
                 }
                 sw.WriteLine("Не выполненные процессы:");
-                sw.WriteLine("\tborn\t|\tstate\t|\tduration\t|\tlast duration\t|\ti/o\t|");
+                sw.WriteLine("\tborn\t\t\tstate\t\t\tduration\tlast duration\t\t\ti/o");
                 foreach (MyTask task in taskQueqe.tasksInWork)
                 {
                     sw.WriteLine(task.getDumpInfo());
