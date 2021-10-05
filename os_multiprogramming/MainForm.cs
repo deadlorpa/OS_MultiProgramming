@@ -212,13 +212,13 @@ namespace os_multiprogramming
                 sw.WriteLine("\tпорождён\t|       состояние       |расчетное время|осталось времени|\tвремя выполнения\t|\tI/O");
                 foreach (MyTask task in taskQueqe.tasksCompleted)
                 {
-                    sw.WriteLine(task.getDumpInfo());
+                    sw.WriteLine(task.getDumpInfo(false));
                 }
                 sw.WriteLine("\nНе выполненные процессы:\n");
                 sw.WriteLine("\tпорождён\t|    состояние  |расчетное время|осталось времени|\tвремя выполнения\t|\tI/O");
                 foreach (MyTask task in taskQueqe.tasksInWork)
                 {
-                    sw.WriteLine(task.getDumpInfo());
+                    sw.WriteLine(task.getDumpInfo(false));
                 }
             }
         }
@@ -229,7 +229,7 @@ namespace os_multiprogramming
             str += "\tпорождён\t|    состояние  |расчетное время|осталось времени|\tвремя выполнения\t|\tI/O\n";
             foreach (MyTask task in taskQueqe.tasksInWork)
             {
-                str+=task.getDumpInfo();
+                str+=task.getDumpInfo(true);
                 str += '\n';
             }
             return str;
