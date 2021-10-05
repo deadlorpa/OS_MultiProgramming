@@ -113,15 +113,6 @@ namespace os_multiprogramming
                     if (taskQueqe.tasksInWork[runningTask].getState() == GlobalVars.TaskStates.IO)
                         runningTask = -1;
 
-               
-                foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
-                {
-                    // состояние в/в
-                    if (task.getState() == GlobalVars.TaskStates.IO)
-                    {
-                        task.io();
-                    }
-                }
                 int i = 0;
                 foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
                 {
@@ -137,6 +128,14 @@ namespace os_multiprogramming
                         i -= 1;
                     }
                     i += 1;
+                }
+                foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
+                {
+                    // состояние в/в
+                    if (task.getState() == GlobalVars.TaskStates.IO)
+                    {
+                        task.io();
+                    }
                 }
                 i = 0;
                 foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
