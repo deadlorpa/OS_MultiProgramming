@@ -81,7 +81,7 @@ namespace os_multiprogramming
             return (int)tp.TotalSeconds;
         }
 
-        public string getDumpInfo()
+        public string getDumpInfo(bool log)
         {
             string info = "";
             info += born.ToString() + "\t";
@@ -97,18 +97,28 @@ namespace os_multiprogramming
             {
                 info += "|\t---------------------\t";
             }
-            if (listDurationIO.Count() > 0)
+            if (log)
             {
-                info += "|\t";
-                foreach (int i in listDurationIO)
-                {
-                    info += (i / GlobalVars.PROCESSOR_TICK).ToString() + "с ";
-                }
-                info+= "\t";
+                if(durationIO > 0)
+                    info += "|\t" + durationIO.ToString() + "\t"; 
+                else
+                    info += "|\tне зарегистрировано I/O\t";
             }
             else
             {
-                info += "|\tне зарегистрировано I/O\t";
+                if (listDurationIO.Count() > 0)
+                {
+                    info += "|\t";
+                    foreach (int i in listDurationIO)
+                    {
+                        info += (i / GlobalVars.PROCESSOR_TICK).ToString() + "с ";
+                    }
+                    info += "\t";
+                }
+                else
+                {
+                    info += "|\tне зарегистрировано I/O\t";
+                }
             }
             return info;
         }
