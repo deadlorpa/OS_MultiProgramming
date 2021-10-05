@@ -172,13 +172,13 @@ namespace os_multiprogramming
                 ".txt";
             using (var sw = new StreamWriter(filename))
             {
-                sw.WriteLine("Выполненные процессы:");
+                sw.WriteLine("Выполненные процессы:\n");
                 sw.WriteLine("\tborn\t\t\tstate\t\t\tduration\tlast duration\t\t\ti/o");
                 foreach (MyTask task in taskQueqe.tasksCompleted)
                 {
                     sw.WriteLine(task.getDumpInfo());
                 }
-                sw.WriteLine("Не выполненные процессы:");
+                sw.WriteLine("\nНе выполненные процессы:\n");
                 sw.WriteLine("\tborn\t\t\tstate\t\t\tduration\tlast duration\t\t\ti/o");
                 foreach (MyTask task in taskQueqe.tasksInWork)
                 {

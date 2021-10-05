@@ -20,7 +20,7 @@ namespace os_multiprogramming
         {
             state = GlobalVars.TaskStates.WAIT;
             Random rnd = new Random();
-            duration = rnd.Next(1, GlobalVars.MAXIMUM_DURATION) * GlobalVars.PROCESSOR_TICK;
+            duration = rnd.Next(2, GlobalVars.MAXIMUM_DURATION) * GlobalVars.PROCESSOR_TICK;
             reservedDuration = duration;
             durationIO = 0;
             born = DateTime.Now;
