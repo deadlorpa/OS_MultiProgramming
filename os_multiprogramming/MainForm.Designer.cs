@@ -30,8 +30,8 @@ namespace os_multiprogramming
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.buttonStart = new MaterialSkin.Controls.MaterialButton();
             this.workTimer = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -58,11 +58,11 @@ namespace os_multiprogramming
             this.buttonStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonStart.HighEmphasis = true;
             this.buttonStart.Icon = global::os_multiprogramming.Properties.Resources.power_off_solid;
-            this.buttonStart.Location = new System.Drawing.Point(660, 71);
+            this.buttonStart.Location = new System.Drawing.Point(660, 16);
             this.buttonStart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonStart.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(300, 44);
+            this.buttonStart.Size = new System.Drawing.Size(300, 51);
             this.buttonStart.TabIndex = 0;
             this.buttonStart.Text = "Старт";
             this.buttonStart.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -83,31 +83,31 @@ namespace os_multiprogramming
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3F));
-            this.tableLayoutPanel1.Controls.Add(this.textboxAvgTimeComplete, 3, 7);
-            this.tableLayoutPanel1.Controls.Add(this.textboxDurationTask, 3, 6);
-            this.tableLayoutPanel1.Controls.Add(this.textboxProbTask, 3, 5);
-            this.tableLayoutPanel1.Controls.Add(this.buttonStart, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.textboxTimeWork, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.textboxAllTasks, 3, 4);
-            this.tableLayoutPanel1.Controls.Add(this.textboxTaskComplete, 4, 4);
-            this.tableLayoutPanel1.Controls.Add(this.textboxProbIO, 4, 5);
-            this.tableLayoutPanel1.Controls.Add(this.textboxDurationIO, 4, 6);
-            this.tableLayoutPanel1.Controls.Add(this.chartProc, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.log, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.textboxAvgTimeComplete, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.textboxDurationTask, 3, 5);
+            this.tableLayoutPanel1.Controls.Add(this.textboxProbTask, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.buttonStart, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textboxTimeWork, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.textboxAllTasks, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.textboxTaskComplete, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.textboxProbIO, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.textboxDurationIO, 4, 5);
+            this.tableLayoutPanel1.Controls.Add(this.chartProc, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.log, 1, 7);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 64);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 10;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 1.718418F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.63377F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.63377F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.63377F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.63377F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.63377F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.63377F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.63377F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.12675F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 1.718418F));
+            this.tableLayoutPanel1.RowCount = 9;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 1.922894F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.89909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.8991F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.8991F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.8991F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.8991F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.8991F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.75964F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 1.922894F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(997, 536);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
@@ -120,7 +120,7 @@ namespace os_multiprogramming
             this.textboxTimeWork.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.textboxTimeWork.Hint = "Время работы";
             this.textboxTimeWork.LeadingIcon = null;
-            this.textboxTimeWork.Location = new System.Drawing.Point(659, 124);
+            this.textboxTimeWork.Location = new System.Drawing.Point(659, 76);
             this.textboxTimeWork.MaxLength = 50;
             this.textboxTimeWork.MouseState = MaterialSkin.MouseState.OUT;
             this.textboxTimeWork.Multiline = false;
@@ -138,7 +138,7 @@ namespace os_multiprogramming
             this.textboxAllTasks.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.textboxAllTasks.Hint = "Возникших задач";
             this.textboxAllTasks.LeadingIcon = null;
-            this.textboxAllTasks.Location = new System.Drawing.Point(659, 180);
+            this.textboxAllTasks.Location = new System.Drawing.Point(659, 139);
             this.textboxAllTasks.MaxLength = 50;
             this.textboxAllTasks.MouseState = MaterialSkin.MouseState.OUT;
             this.textboxAllTasks.Multiline = false;
@@ -156,7 +156,7 @@ namespace os_multiprogramming
             this.textboxTaskComplete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.textboxTaskComplete.Hint = "Выполненных задач";
             this.textboxTaskComplete.LeadingIcon = null;
-            this.textboxTaskComplete.Location = new System.Drawing.Point(813, 180);
+            this.textboxTaskComplete.Location = new System.Drawing.Point(813, 139);
             this.textboxTaskComplete.MaxLength = 50;
             this.textboxTaskComplete.MouseState = MaterialSkin.MouseState.OUT;
             this.textboxTaskComplete.Multiline = false;
@@ -174,7 +174,7 @@ namespace os_multiprogramming
             this.textboxProbIO.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.textboxProbIO.Hint = "Вероятность I/O";
             this.textboxProbIO.LeadingIcon = null;
-            this.textboxProbIO.Location = new System.Drawing.Point(813, 236);
+            this.textboxProbIO.Location = new System.Drawing.Point(813, 202);
             this.textboxProbIO.MaxLength = 50;
             this.textboxProbIO.MouseState = MaterialSkin.MouseState.OUT;
             this.textboxProbIO.Multiline = false;
@@ -192,7 +192,7 @@ namespace os_multiprogramming
             this.textboxDurationIO.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.textboxDurationIO.Hint = "MAX I/O (c)";
             this.textboxDurationIO.LeadingIcon = null;
-            this.textboxDurationIO.Location = new System.Drawing.Point(813, 292);
+            this.textboxDurationIO.Location = new System.Drawing.Point(813, 265);
             this.textboxDurationIO.MaxLength = 50;
             this.textboxDurationIO.MouseState = MaterialSkin.MouseState.OUT;
             this.textboxDurationIO.Multiline = false;
@@ -204,22 +204,22 @@ namespace os_multiprogramming
             // 
             // chartProc
             // 
-            chartArea2.AxisX.Title = "Длительность всех IO";
-            chartArea2.AxisY.Title = "Время выполнения";
-            chartArea2.Name = "ChartArea1";
-            this.chartProc.ChartAreas.Add(chartArea2);
+            chartArea1.AxisX.Title = "Длительность всех IO";
+            chartArea1.AxisY.Title = "Время выполнения";
+            chartArea1.Name = "ChartArea1";
+            this.chartProc.ChartAreas.Add(chartArea1);
             this.chartProc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartProc.Location = new System.Drawing.Point(32, 68);
+            this.chartProc.Location = new System.Drawing.Point(32, 13);
             this.chartProc.Name = "chartProc";
             this.chartProc.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             this.tableLayoutPanel1.SetRowSpan(this.chartProc, 6);
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series2.LabelBackColor = System.Drawing.Color.White;
-            series2.LabelBorderColor = System.Drawing.Color.White;
-            series2.Name = "Process";
-            this.chartProc.Series.Add(series2);
-            this.chartProc.Size = new System.Drawing.Size(592, 330);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series1.LabelBackColor = System.Drawing.Color.White;
+            series1.LabelBorderColor = System.Drawing.Color.White;
+            series1.Name = "Process";
+            this.chartProc.Series.Add(series1);
+            this.chartProc.Size = new System.Drawing.Size(592, 372);
             this.chartProc.TabIndex = 6;
             this.chartProc.Text = "график";
             // 
@@ -231,7 +231,7 @@ namespace os_multiprogramming
             this.textboxProbTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.textboxProbTask.Hint = "Вероятность задачи";
             this.textboxProbTask.LeadingIcon = null;
-            this.textboxProbTask.Location = new System.Drawing.Point(659, 236);
+            this.textboxProbTask.Location = new System.Drawing.Point(659, 202);
             this.textboxProbTask.MaxLength = 50;
             this.textboxProbTask.MouseState = MaterialSkin.MouseState.OUT;
             this.textboxProbTask.Multiline = false;
@@ -249,7 +249,7 @@ namespace os_multiprogramming
             this.textboxDurationTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.textboxDurationTask.Hint = "MAX TASK (c)";
             this.textboxDurationTask.LeadingIcon = null;
-            this.textboxDurationTask.Location = new System.Drawing.Point(659, 292);
+            this.textboxDurationTask.Location = new System.Drawing.Point(659, 265);
             this.textboxDurationTask.MaxLength = 50;
             this.textboxDurationTask.MouseState = MaterialSkin.MouseState.OUT;
             this.textboxDurationTask.Multiline = false;
@@ -268,7 +268,7 @@ namespace os_multiprogramming
             this.textboxAvgTimeComplete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.textboxAvgTimeComplete.Hint = "Среднее время выполнения задачи (c)";
             this.textboxAvgTimeComplete.LeadingIcon = null;
-            this.textboxAvgTimeComplete.Location = new System.Drawing.Point(659, 348);
+            this.textboxAvgTimeComplete.Location = new System.Drawing.Point(659, 328);
             this.textboxAvgTimeComplete.MaxLength = 50;
             this.textboxAvgTimeComplete.MouseState = MaterialSkin.MouseState.OUT;
             this.textboxAvgTimeComplete.Multiline = false;
@@ -287,10 +287,10 @@ namespace os_multiprogramming
             this.log.Dock = System.Windows.Forms.DockStyle.Fill;
             this.log.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.log.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.log.Location = new System.Drawing.Point(32, 404);
+            this.log.Location = new System.Drawing.Point(32, 391);
             this.log.MouseState = MaterialSkin.MouseState.HOVER;
             this.log.Name = "log";
-            this.log.Size = new System.Drawing.Size(929, 112);
+            this.log.Size = new System.Drawing.Size(929, 126);
             this.log.TabIndex = 10;
             this.log.Text = "";
             // 

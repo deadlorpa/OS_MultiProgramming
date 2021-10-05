@@ -151,13 +151,6 @@ namespace os_multiprogramming
                     i += 1;
                 }
             }
-
-            if(runningTask != -1)
-                if(taskQueqe.tasksInWork[runningTask].run())
-                {
-                    runningTask = -1;
-                }
-
             foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
             {
                 // состояние в/в
@@ -166,6 +159,13 @@ namespace os_multiprogramming
                     task.io();
                 }
             }
+            if (runningTask != -1)
+                if(taskQueqe.tasksInWork[runningTask].run())
+                {
+                    runningTask = -1;
+                }
+
+            
 
             await Task.Run(() => taskNew());
             span = DateTime.Now.Subtract(start);
