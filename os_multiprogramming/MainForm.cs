@@ -25,8 +25,13 @@ namespace os_multiprogramming
         TimeSpan span;
         int runningTask = -1;
 
+        static string defaultDumpPath = "C:\\Users\\Public\\MyDumps\\";
+
         public MainForm()
         {
+            if (!System.IO.Directory.Exists(defaultDumpPath))
+                System.IO.Directory.CreateDirectory(defaultDumpPath);
+
             InitializeComponent();
             materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
@@ -157,13 +162,13 @@ namespace os_multiprogramming
 
         private void dump()
         {
-            string filename = "dump_" + 
-                DateTime.Now.Day.ToString() + '.' +
-                DateTime.Now.Month.ToString() + '.' +
+            string filename = defaultDumpPath + "dump_" + 
+                DateTime.Now.Day.ToString() + '-' +
+                DateTime.Now.Month.ToString() + '-' +
                 DateTime.Now.Year.ToString() + '_' +
-                DateTime.Now.Hour.ToString() + ':' +
-                DateTime.Now.Minute.ToString() + ':' +
-                DateTime.Now.Second.ToString() + ':' +
+                DateTime.Now.Hour.ToString() + '.' +
+                DateTime.Now.Minute.ToString() + '.' +
+                DateTime.Now.Second.ToString() +
                 ".txt";
             using (var sw = new StreamWriter(filename))
             {

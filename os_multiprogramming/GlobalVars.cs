@@ -12,7 +12,7 @@ namespace os_multiprogramming
         public static int MAXIMUM_DURATION_IO = 30; // секунды
         public static int PROCESSOR_TICK = 1000;
         public static double PROBABILITY_IO = 0.2;
-        public static double PROBABILITY_NEW_TASK = 0.1;
+        public static double PROBABILITY_NEW_TASK = 0.25;
         public enum TaskStates { RUN, WAIT, COMPLETE, IO };
     }
 }

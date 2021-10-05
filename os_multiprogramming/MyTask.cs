@@ -84,21 +84,21 @@ namespace os_multiprogramming
             string info = "";
             info += "born: " + born.ToString();
             info += "\nstate: " + state.ToString();
-            info += "\nduration: " + reservedDuration.ToString();
+            info += "\nduration: " + (reservedDuration / GlobalVars.PROCESSOR_TICK).ToString();
             if(state == GlobalVars.TaskStates.COMPLETE)
             {
                 info += "\ncomplete: " + complete.ToString();
             }
             else
             {
-                info += "\nlastdur:" + (reservedDuration - duration).ToString();
+                info += "\nlastdur:" + ((reservedDuration - duration)/GlobalVars.PROCESSOR_TICK).ToString();
             }
             if(listDurationIO.Count() > 0)
             {
                 info += "\nio: ";
                 foreach (int i in listDurationIO)
                 {
-                    info += i.ToString() + ' ';
+                    info += (i / GlobalVars.PROCESSOR_TICK).ToString() + ' ';
                 }
             }
             return info;
