@@ -116,22 +116,6 @@ namespace os_multiprogramming
                 int i = 0;
                 foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
                 {
-                    // состояние завершения
-                    if (task.getState() == GlobalVars.TaskStates.COMPLETE)
-                    {
-                        if (runningTask == i)
-                            runningTask = -1;
-                        taskQueqe.tasksCompleted.Add(task);
-                        taskQueqe.tasksInWork.RemoveAt(i);
-                        Tuple<int, int> tuple = task.getProcTimesInfo();
-                        updateChart(new DataPoint(tuple.Item1, tuple.Item2));
-                    }
-                    else
-                        i += 1;
-                }
-                i = 0;
-                foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
-                {
                     // состояние ожидания
                     if (task.getState() == GlobalVars.TaskStates.WAIT)
                     {
@@ -150,21 +134,37 @@ namespace os_multiprogramming
                     }
                     i += 1;
                 }
-            }
-            foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
-            {
-                // состояние в/в
-                if (task.getState() == GlobalVars.TaskStates.IO)
+                foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
                 {
-                    task.io();
+                    // состояние в/в
+                    if (task.getState() == GlobalVars.TaskStates.IO)
+                    {
+                        task.io();
+                    }
                 }
-            }
-            if (runningTask != -1)
-                if(taskQueqe.tasksInWork[runningTask].run())
-                {
-                    runningTask = -1;
-                }
+                if (runningTask != -1)
+                    if (taskQueqe.tasksInWork[runningTask].run())
+                    {
+                        runningTask = -1;
+                    }
 
+                i = 0;
+                foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
+                {
+                    // состояние завершения
+                    if (task.getState() == GlobalVars.TaskStates.COMPLETE)
+                    {
+                        if (runningTask == i)
+                            runningTask = -1;
+                        taskQueqe.tasksCompleted.Add(task);
+                        taskQueqe.tasksInWork.RemoveAt(i);
+                        Tuple<int, int> tuple = task.getProcTimesInfo();
+                        updateChart(new DataPoint(tuple.Item1, tuple.Item2));
+                    }
+                    else
+                        i += 1;
+                }
+            }
             
 
             await Task.Run(() => taskNew());
