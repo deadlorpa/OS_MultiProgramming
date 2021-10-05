@@ -159,7 +159,7 @@ namespace os_multiprogramming
                         taskQueqe.tasksCompleted.Add(task);
                         taskQueqe.tasksInWork.RemoveAt(i);
                         //Tuple<int, int> tuple = task.getProcTimesInfo();
-                        updateChart(new DataPoint(chartProc.Series[i].Points.Count(), task.getTimeLive()));
+                        updateChart(new DataPoint(chartProc.Series[0].Points.Count(), task.getTimeLive()));
                     }
                     else
                         i += 1;
@@ -226,7 +226,7 @@ namespace os_multiprogramming
         private string getLog()
         {
             string str = "";
-            str += "\tпорождён\t|    состояние  |   расчетное   |   осталось    |\tI/O\n";
+            str += "\tпорождён\t|    состояние  |   расчетное   |   осталось    | I/O\n";
             foreach (MyTask task in taskQueqe.tasksInWork)
             {
                 str+=task.getDumpInfo(true);
