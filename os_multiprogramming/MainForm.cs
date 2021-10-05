@@ -125,47 +125,54 @@ namespace os_multiprogramming
                         taskQueqe.tasksInWork.RemoveAt(i);
                         Tuple<int, int> tuple = task.getProcTimesInfo();
                         updateChart(new DataPoint(tuple.Item1, tuple.Item2));
-                        i -= 1;
                     }
-                    i += 1;
-                }
-                foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
-                {
-                    // состояние в/в
-                    if (task.getState() == GlobalVars.TaskStates.IO)
-                    {
-                        task.io();
-                    }
+                    else
+                        i += 1;
                 }
                 i = 0;
                 foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
                 {
                     // состояние ожидания
-                    if (taskQueqe.tasksInWork[i].getState() == GlobalVars.TaskStates.WAIT)
+                    if (task.getState() == GlobalVars.TaskStates.WAIT)
                     {
                         if (runningTask == -1)
                         {
                             runningTask = i;
+                            taskQueqe.tasksInWork[runningTask].setState(GlobalVars.TaskStates.RUN);
                         }
                         if (runningTask > i)
                         {
-                            task.setState(GlobalVars.TaskStates.WAIT);
+                            taskQueqe.tasksInWork[runningTask].setState(GlobalVars.TaskStates.WAIT);
                             runningTask = i;
+                            taskQueqe.tasksInWork[runningTask].setState(GlobalVars.TaskStates.RUN);
 
                         }
                     }
+                    i += 1;
                 }
             }
 
             if(runningTask != -1)
-                taskQueqe.tasksInWork[runningTask].run();
+                if(taskQueqe.tasksInWork[runningTask].run())
+                {
+                    runningTask = -1;
+                }
+
+            foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
+            {
+                // состояние в/в
+                if (task.getState() == GlobalVars.TaskStates.IO)
+                {
+                    task.io();
+                }
+            }
 
             await Task.Run(() => taskNew());
             span = DateTime.Now.Subtract(start);
             textboxTimeWork.Text = span.Hours.ToString() + ':' + span.Minutes.ToString() + ':' + span.Seconds.ToString();
             textboxTaskComplete.Text = taskQueqe.tasksCompleted.Count().ToString();
             textboxAllTasks.Text = (taskQueqe.tasksInWork.Count() + taskQueqe.tasksCompleted.Count()).ToString();
-
+            log.Text = getLog();
             workTimer.Enabled = true;
             canStop = true;
         }
@@ -214,6 +221,18 @@ namespace os_multiprogramming
                     sw.WriteLine(task.getDumpInfo());
                 }
             }
+        }
+
+        private string getLog()
+        {
+            string str = "";
+            str += "\tпорождён\t|    состояние  |расчетное время|осталось времени|\tвремя выполнения\t|\tI/O\n";
+            foreach (MyTask task in taskQueqe.tasksInWork)
+            {
+                str+=task.getDumpInfo();
+                str += '\n';
+            }
+            return str;
         }
     }
 }

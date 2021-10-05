@@ -8,11 +8,11 @@ namespace os_multiprogramming
 {
     public static class GlobalVars
     {
-        public static int MAXIMUM_DURATION = 10;  // секунды
-        public static int MAXIMUM_DURATION_IO = 3; // секунды
+        public static int MAXIMUM_DURATION = 20;  // секунды
+        public static int MAXIMUM_DURATION_IO = 6; // секунды
         public static int PROCESSOR_TICK = 1000;
-        public static double PROBABILITY_IO = 0.2;
-        public static double PROBABILITY_NEW_TASK = 0.34;
+        public static double PROBABILITY_IO = 0.1;
+        public static double PROBABILITY_NEW_TASK = 0.6;
         public enum TaskStates { RUN, WAIT, COMPLETE, IO };
     }
 }

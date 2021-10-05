@@ -36,24 +36,24 @@ namespace os_multiprogramming
             }
             return false;
         }
-        public void run()
+        public bool run()
         {
-            state = GlobalVars.TaskStates.RUN;
             duration -= GlobalVars.PROCESSOR_TICK;
             if (duration == 0)
             {
                 state = GlobalVars.TaskStates.COMPLETE;
                 complete = DateTime.Now;
-                return;
+                return false;
             }
             Random rnd = new Random();
-            if (rnd.NextDouble() >= GlobalVars.PROBABILITY_IO)
+            if (rnd.NextDouble() <= GlobalVars.PROBABILITY_IO)
             {
                 durationIO = rnd.Next(1, GlobalVars.MAXIMUM_DURATION_IO) * GlobalVars.PROCESSOR_TICK;
                 listDurationIO.Add(durationIO);
                 state = GlobalVars.TaskStates.IO;
+                return true;
             }
-                        
+            return false;
         }
         public GlobalVars.TaskStates getState()
         {
