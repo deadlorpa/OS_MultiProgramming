@@ -26,13 +26,15 @@ namespace os_multiprogramming
             born = DateTime.Now;
             listDurationIO = new List<int>();
         }
-        public void io()
+        public bool io()
         {
             durationIO -= GlobalVars.PROCESSOR_TICK;
             if (durationIO == 0)
             {
                 state = GlobalVars.TaskStates.WAIT;
+                return true;
             }
+            return false;
         }
         public void run()
         {

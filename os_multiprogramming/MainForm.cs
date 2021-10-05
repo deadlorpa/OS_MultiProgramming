@@ -20,6 +20,7 @@ namespace os_multiprogramming
         private readonly MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
         TaskQueqe taskQueqe;
         bool isRunning = false;
+        bool canStop = true;
         DateTime start;
 
         TimeSpan span;
@@ -63,38 +64,40 @@ namespace os_multiprogramming
             }
             else
             {
-                workTimer.Enabled = false;
-                buttonStart.UseAccentColor = false;
-                buttonStart.Text = "Старт";
-                isRunning = false;
-                textboxTimeWork.Text = span.Hours.ToString() + ':' + span.Minutes.ToString() + ':' + span.Seconds.ToString();
-                foreach(MyTask task in taskQueqe.tasksInWork.ToArray())
+                if (canStop)
                 {
-                    if (task.getState() == GlobalVars.TaskStates.COMPLETE)
+                    workTimer.Enabled = false;
+                    buttonStart.UseAccentColor = false;
+                    buttonStart.Text = "Старт";
+                    isRunning = false;
+                    textboxTimeWork.Text = span.Hours.ToString() + ':' + span.Minutes.ToString() + ':' + span.Seconds.ToString();
+                    foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
                     {
-                        taskQueqe.tasksCompleted.Add(task);
-                        taskQueqe.tasksInWork.Remove(task);
-                        Tuple<int, int> tuple = task.getProcTimesInfo();
-                        updateChart(new DataPoint(tuple.Item1, tuple.Item2));
+                        if (task.getState() == GlobalVars.TaskStates.COMPLETE)
+                        {
+                            taskQueqe.tasksCompleted.Add(task);
+                            taskQueqe.tasksInWork.Remove(task);
+                            Tuple<int, int> tuple = task.getProcTimesInfo();
+                            updateChart(new DataPoint(tuple.Item1, tuple.Item2));
+                        }
                     }
+                    textboxTaskComplete.Text = taskQueqe.tasksCompleted.Count().ToString();
+                    textboxAllTasks.Text = (taskQueqe.tasksInWork.Count() + taskQueqe.tasksCompleted.Count()).ToString();
+                    int avgTime = 0;
+                    int n = taskQueqe.tasksCompleted.Count();
+                    foreach (MyTask task in taskQueqe.tasksCompleted.ToArray())
+                    {
+                        avgTime += task.getTimeLive();
+                    }
+                    if (n > 0)
+                        textboxAvgTimeComplete.Text = (avgTime /= n).ToString();
+                    else
+                        textboxAvgTimeComplete.Text = "Нет выполненых задач :(";
+                    dump();
+                    taskQueqe.tasksInWork.Clear();
+                    taskQueqe.tasksCompleted.Clear();
+                    runningTask = -1;
                 }
-                textboxTaskComplete.Text = taskQueqe.tasksCompleted.Count().ToString();
-                textboxAllTasks.Text = (taskQueqe.tasksInWork.Count() + taskQueqe.tasksCompleted.Count()).ToString();
-                int avgTime = 0;
-                int n = taskQueqe.tasksCompleted.Count();
-                foreach (MyTask task in taskQueqe.tasksCompleted.ToArray())
-                {
-                    avgTime += task.getTimeLive();
-                }
-                if (n > 0)
-                    textboxAvgTimeComplete.Text = (avgTime /= n).ToString();
-                else
-                    textboxAvgTimeComplete.Text = "Нет выполненых задач :(";
-                dump();
-                taskQueqe.tasksInWork.Clear();
-                taskQueqe.tasksCompleted.Clear();
-                runningTask = -1;
-               
             }
 
         }
@@ -102,35 +105,26 @@ namespace os_multiprogramming
         async private void workTimer_Tick(object sender, EventArgs e)
         {
             workTimer.Enabled = false;
-            
+            canStop = false;
+
             lock (taskQueqe.tasksInWork)
             {
                 if (runningTask != -1)
                     if (taskQueqe.tasksInWork[runningTask].getState() == GlobalVars.TaskStates.IO)
                         runningTask = -1;
 
-                int i = 0;
-                foreach(MyTask task in taskQueqe.tasksInWork.ToArray())
+               
+                foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
                 {
-                    // состояние ожидания
-                    if(taskQueqe.tasksInWork[i].getState() == GlobalVars.TaskStates.WAIT)
-                    {
-                        if (runningTask == -1)
-                        {
-                            runningTask = i;
-                        }
-                        if (runningTask > i)
-                        {
-                            task.setState(GlobalVars.TaskStates.WAIT);
-                            runningTask = i;
-
-                        }
-                    }
                     // состояние в/в
-                    if(task.getState() == GlobalVars.TaskStates.IO)
+                    if (task.getState() == GlobalVars.TaskStates.IO)
                     {
                         task.io();
                     }
+                }
+                int i = 0;
+                foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
+                {
                     // состояние завершения
                     if (task.getState() == GlobalVars.TaskStates.COMPLETE)
                     {
@@ -144,6 +138,24 @@ namespace os_multiprogramming
                     }
                     i += 1;
                 }
+                i = 0;
+                foreach (MyTask task in taskQueqe.tasksInWork.ToArray())
+                {
+                    // состояние ожидания
+                    if (taskQueqe.tasksInWork[i].getState() == GlobalVars.TaskStates.WAIT)
+                    {
+                        if (runningTask == -1)
+                        {
+                            runningTask = i;
+                        }
+                        if (runningTask > i)
+                        {
+                            task.setState(GlobalVars.TaskStates.WAIT);
+                            runningTask = i;
+
+                        }
+                    }
+                }
             }
 
             if(runningTask != -1)
@@ -156,6 +168,7 @@ namespace os_multiprogramming
             textboxAllTasks.Text = (taskQueqe.tasksInWork.Count() + taskQueqe.tasksCompleted.Count()).ToString();
 
             workTimer.Enabled = true;
+            canStop = true;
         }
 
         private void taskNew() // случайное возникновение новой задачи
