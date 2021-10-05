@@ -100,7 +100,7 @@ namespace os_multiprogramming
             if (log)
             {
                 if(durationIO > 0)
-                    info += "|\t" + durationIO.ToString() + "\t"; 
+                    info += "|\t" + (durationIO / GlobalVars.PROCESSOR_TICK).ToString() + "\t"; 
                 else
                     info += "|\tне зарегистрировано I/O\t";
             }
