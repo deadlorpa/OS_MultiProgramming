@@ -88,15 +88,7 @@ namespace os_multiprogramming
             info += "|\t" + state.ToString() + "\t";
             info += "|\t" + (reservedDuration / GlobalVars.PROCESSOR_TICK).ToString() + "c\t";
             info += "|\t" + (duration / GlobalVars.PROCESSOR_TICK).ToString() + "c\t";
-            if(state == GlobalVars.TaskStates.COMPLETE)
-            {
-
-                info += "|\t" + complete.ToString() + "\t";
-            }
-            else
-            {
-                info += "|\t---------------------\t";
-            }
+            
             if (log)
             {
                 if(durationIO > 0)
@@ -106,6 +98,15 @@ namespace os_multiprogramming
             }
             else
             {
+                if (state == GlobalVars.TaskStates.COMPLETE)
+                {
+
+                    info += "|\t" + complete.ToString() + "\t";
+                }
+                else
+                {
+                    info += "|\t---------------------\t";
+                }
                 if (listDurationIO.Count() > 0)
                 {
                     info += "|\t";
