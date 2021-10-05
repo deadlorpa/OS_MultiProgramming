@@ -101,7 +101,7 @@ namespace os_multiprogramming
                 if (state == GlobalVars.TaskStates.COMPLETE)
                 {
 
-                    info += "|\t" + complete.ToString() + "\t";
+                    info += "|\t" + complete.ToString() + "с\t";
                 }
                 else
                 {
