@@ -83,7 +83,7 @@ namespace os_multiprogramming
         {
             string info = "";
             info += "born: " + born.ToString();
-            info += "\nstate: " + state.ToString();
+            info += "\nstate: " + state.ToString() + " at moment " + DateTime.Now.ToString();
             info += "\nduration: " + (reservedDuration / GlobalVars.PROCESSOR_TICK).ToString();
             if(state == GlobalVars.TaskStates.COMPLETE)
             {
@@ -100,6 +100,10 @@ namespace os_multiprogramming
                 {
                     info += (i / GlobalVars.PROCESSOR_TICK).ToString() + ' ';
                 }
+            }
+            else
+            {
+                info += "\nio: не зарегистрировано I/O";
             }
             return info;
         }
