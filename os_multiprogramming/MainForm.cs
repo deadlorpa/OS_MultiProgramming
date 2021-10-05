@@ -52,6 +52,8 @@ namespace os_multiprogramming
         {
             if(!isRunning)
             {
+                chartProc.Series[0].Points.Clear();
+                textboxTimeWork.Text = "0:0:0";
                 buttonStart.UseAccentColor = true;
                 buttonStart.Text = "Стоп";
                 isRunning = true;
@@ -66,7 +68,7 @@ namespace os_multiprogramming
                 buttonStart.Text = "Старт";
                 isRunning = false;
                 textboxTimeWork.Text = span.Hours.ToString() + ':' + span.Minutes.ToString() + ':' + span.Seconds.ToString();
-                foreach(MyTask task in taskQueqe.tasksInWork)
+                foreach(MyTask task in taskQueqe.tasksInWork.ToArray())
                 {
                     if (task.getState() == GlobalVars.TaskStates.COMPLETE)
                     {
@@ -76,9 +78,11 @@ namespace os_multiprogramming
                         updateChart(new DataPoint(tuple.Item1, tuple.Item2));
                     }
                 }
+                textboxTaskComplete.Text = taskQueqe.tasksCompleted.Count().ToString();
+                textboxAllTasks.Text = (taskQueqe.tasksInWork.Count() + taskQueqe.tasksCompleted.Count()).ToString();
                 int avgTime = 0;
                 int n = taskQueqe.tasksCompleted.Count();
-                foreach (MyTask task in taskQueqe.tasksCompleted)
+                foreach (MyTask task in taskQueqe.tasksCompleted.ToArray())
                 {
                     avgTime += task.getTimeLive();
                 }
@@ -87,7 +91,10 @@ namespace os_multiprogramming
                 else
                     textboxAvgTimeComplete.Text = "Нет выполненых задач :(";
                 dump();
-
+                taskQueqe.tasksInWork.Clear();
+                taskQueqe.tasksCompleted.Clear();
+                runningTask = -1;
+               
             }
 
         }
