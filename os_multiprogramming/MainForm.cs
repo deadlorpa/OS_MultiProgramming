@@ -226,7 +226,7 @@ namespace os_multiprogramming
         private string getLog()
         {
             string str = "";
-            str += "\tпорождён\t|    состояние  |   расчетное   |   осталось    | I/O\n";
+            str += "\tпорождён\t|    состояние  |   расчетное   |   осталось    | \tI/O\n";
             foreach (MyTask task in taskQueqe.tasksInWork)
             {
                 str+=task.getDumpInfo(true);
