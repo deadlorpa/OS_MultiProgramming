@@ -66,6 +66,16 @@ namespace os_multiprogramming
                 buttonStart.Text = "Старт";
                 isRunning = false;
                 textboxTimeWork.Text = span.Hours.ToString() + ':' + span.Minutes.ToString() + ':' + span.Seconds.ToString();
+                foreach(MyTask task in taskQueqe.tasksInWork)
+                {
+                    if (task.getState() == GlobalVars.TaskStates.COMPLETE)
+                    {
+                        taskQueqe.tasksCompleted.Add(task);
+                        taskQueqe.tasksInWork.Remove(task);
+                        Tuple<int, int> tuple = task.getProcTimesInfo();
+                        updateChart(new DataPoint(tuple.Item1, tuple.Item2));
+                    }
+                }
                 int avgTime = 0;
                 int n = taskQueqe.tasksCompleted.Count();
                 foreach (MyTask task in taskQueqe.tasksCompleted)
@@ -173,13 +183,13 @@ namespace os_multiprogramming
             using (var sw = new StreamWriter(filename))
             {
                 sw.WriteLine("Выполненные процессы:\n");
-                sw.WriteLine("\tborn\t\t\tstate\t\t\tduration\tlast duration\t\t\ti/o");
+                sw.WriteLine("\tпорождён\t|       состояние       |расчетное время|осталось времени|\tвремя выполнения\t|\tI/O");
                 foreach (MyTask task in taskQueqe.tasksCompleted)
                 {
                     sw.WriteLine(task.getDumpInfo());
                 }
                 sw.WriteLine("\nНе выполненные процессы:\n");
-                sw.WriteLine("\tborn\t\t\tstate\t\t\tduration\tlast duration\t\t\ti/o");
+                sw.WriteLine("\tпорождён\t|    состояние  |расчетное время|осталось времени|\tвремя выполнения\t|\tI/O");
                 foreach (MyTask task in taskQueqe.tasksInWork)
                 {
                     sw.WriteLine(task.getDumpInfo());
