@@ -30,6 +30,8 @@ namespace os_multiprogramming
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.buttonStart = new MaterialSkin.Controls.MaterialButton();
             this.workTimer = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -38,24 +40,28 @@ namespace os_multiprogramming
             this.textboxTaskComplete = new MaterialSkin.Controls.MaterialTextBox();
             this.textboxProbIO = new MaterialSkin.Controls.MaterialTextBox();
             this.textboxDurationIO = new MaterialSkin.Controls.MaterialTextBox();
-            this.pictureBoxGraphic = new System.Windows.Forms.PictureBox();
+            this.chartProc = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.textboxProbTask = new MaterialSkin.Controls.MaterialTextBox();
+            this.textboxDurationTask = new MaterialSkin.Controls.MaterialTextBox();
+            this.textboxAvgTimeComplete = new MaterialSkin.Controls.MaterialTextBox();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGraphic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartProc)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonStart
             // 
             this.buttonStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel1.SetColumnSpan(this.buttonStart, 2);
             this.buttonStart.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.buttonStart.Depth = 0;
             this.buttonStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonStart.HighEmphasis = true;
             this.buttonStart.Icon = global::os_multiprogramming.Properties.Resources.power_off_solid;
-            this.buttonStart.Location = new System.Drawing.Point(541, 73);
+            this.buttonStart.Location = new System.Drawing.Point(660, 80);
             this.buttonStart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonStart.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(244, 46);
+            this.buttonStart.Size = new System.Drawing.Size(300, 52);
             this.buttonStart.TabIndex = 0;
             this.buttonStart.Text = "Старт";
             this.buttonStart.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -69,19 +75,23 @@ namespace os_multiprogramming
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnCount = 6;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3F));
+            this.tableLayoutPanel1.Controls.Add(this.textboxAvgTimeComplete, 3, 7);
+            this.tableLayoutPanel1.Controls.Add(this.textboxDurationTask, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.textboxProbTask, 3, 5);
             this.tableLayoutPanel1.Controls.Add(this.buttonStart, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.textboxTimeWork, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.textboxAllTasks, 3, 4);
-            this.tableLayoutPanel1.Controls.Add(this.textboxTaskComplete, 3, 5);
-            this.tableLayoutPanel1.Controls.Add(this.textboxProbIO, 3, 6);
-            this.tableLayoutPanel1.Controls.Add(this.textboxDurationIO, 3, 7);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBoxGraphic, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.textboxTaskComplete, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.textboxProbIO, 4, 5);
+            this.tableLayoutPanel1.Controls.Add(this.textboxDurationIO, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.chartProc, 1, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 64);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -96,23 +106,24 @@ namespace os_multiprogramming
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.01461F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.01461F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 1.941561F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(816, 483);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(997, 536);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // textboxTimeWork
             // 
             this.textboxTimeWork.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tableLayoutPanel1.SetColumnSpan(this.textboxTimeWork, 2);
             this.textboxTimeWork.Depth = 0;
             this.textboxTimeWork.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textboxTimeWork.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.textboxTimeWork.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.textboxTimeWork.Hint = "Время работы";
             this.textboxTimeWork.LeadingIcon = null;
-            this.textboxTimeWork.Location = new System.Drawing.Point(540, 128);
+            this.textboxTimeWork.Location = new System.Drawing.Point(659, 141);
             this.textboxTimeWork.MaxLength = 50;
             this.textboxTimeWork.MouseState = MaterialSkin.MouseState.OUT;
             this.textboxTimeWork.Multiline = false;
             this.textboxTimeWork.Name = "textboxTimeWork";
-            this.textboxTimeWork.Size = new System.Drawing.Size(246, 50);
+            this.textboxTimeWork.Size = new System.Drawing.Size(302, 50);
             this.textboxTimeWork.TabIndex = 1;
             this.textboxTimeWork.Text = "00:00:00";
             this.textboxTimeWork.TrailingIcon = null;
@@ -122,15 +133,15 @@ namespace os_multiprogramming
             this.textboxAllTasks.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textboxAllTasks.Depth = 0;
             this.textboxAllTasks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textboxAllTasks.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.textboxAllTasks.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.textboxAllTasks.Hint = "Возникших задач";
             this.textboxAllTasks.LeadingIcon = null;
-            this.textboxAllTasks.Location = new System.Drawing.Point(540, 186);
+            this.textboxAllTasks.Location = new System.Drawing.Point(659, 205);
             this.textboxAllTasks.MaxLength = 50;
             this.textboxAllTasks.MouseState = MaterialSkin.MouseState.OUT;
             this.textboxAllTasks.Multiline = false;
             this.textboxAllTasks.Name = "textboxAllTasks";
-            this.textboxAllTasks.Size = new System.Drawing.Size(246, 50);
+            this.textboxAllTasks.Size = new System.Drawing.Size(148, 50);
             this.textboxAllTasks.TabIndex = 2;
             this.textboxAllTasks.Text = "0";
             this.textboxAllTasks.TrailingIcon = null;
@@ -140,15 +151,15 @@ namespace os_multiprogramming
             this.textboxTaskComplete.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textboxTaskComplete.Depth = 0;
             this.textboxTaskComplete.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textboxTaskComplete.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.textboxTaskComplete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.textboxTaskComplete.Hint = "Выполненных задач";
             this.textboxTaskComplete.LeadingIcon = null;
-            this.textboxTaskComplete.Location = new System.Drawing.Point(540, 244);
+            this.textboxTaskComplete.Location = new System.Drawing.Point(813, 205);
             this.textboxTaskComplete.MaxLength = 50;
             this.textboxTaskComplete.MouseState = MaterialSkin.MouseState.OUT;
             this.textboxTaskComplete.Multiline = false;
             this.textboxTaskComplete.Name = "textboxTaskComplete";
-            this.textboxTaskComplete.Size = new System.Drawing.Size(246, 50);
+            this.textboxTaskComplete.Size = new System.Drawing.Size(148, 50);
             this.textboxTaskComplete.TabIndex = 3;
             this.textboxTaskComplete.Text = "0";
             this.textboxTaskComplete.TrailingIcon = null;
@@ -158,15 +169,15 @@ namespace os_multiprogramming
             this.textboxProbIO.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textboxProbIO.Depth = 0;
             this.textboxProbIO.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textboxProbIO.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.textboxProbIO.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.textboxProbIO.Hint = "Вероятность I/O";
             this.textboxProbIO.LeadingIcon = null;
-            this.textboxProbIO.Location = new System.Drawing.Point(540, 302);
+            this.textboxProbIO.Location = new System.Drawing.Point(813, 269);
             this.textboxProbIO.MaxLength = 50;
             this.textboxProbIO.MouseState = MaterialSkin.MouseState.OUT;
             this.textboxProbIO.Multiline = false;
             this.textboxProbIO.Name = "textboxProbIO";
-            this.textboxProbIO.Size = new System.Drawing.Size(246, 50);
+            this.textboxProbIO.Size = new System.Drawing.Size(148, 50);
             this.textboxProbIO.TabIndex = 4;
             this.textboxProbIO.Text = "0.5";
             this.textboxProbIO.TrailingIcon = null;
@@ -176,39 +187,105 @@ namespace os_multiprogramming
             this.textboxDurationIO.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textboxDurationIO.Depth = 0;
             this.textboxDurationIO.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textboxDurationIO.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.textboxDurationIO.Hint = "Продолжительность I/O (MAX)";
+            this.textboxDurationIO.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textboxDurationIO.Hint = "MAX I/O (c)";
             this.textboxDurationIO.LeadingIcon = null;
-            this.textboxDurationIO.Location = new System.Drawing.Point(540, 360);
+            this.textboxDurationIO.Location = new System.Drawing.Point(813, 333);
             this.textboxDurationIO.MaxLength = 50;
             this.textboxDurationIO.MouseState = MaterialSkin.MouseState.OUT;
             this.textboxDurationIO.Multiline = false;
             this.textboxDurationIO.Name = "textboxDurationIO";
-            this.textboxDurationIO.Size = new System.Drawing.Size(246, 50);
+            this.textboxDurationIO.Size = new System.Drawing.Size(148, 50);
             this.textboxDurationIO.TabIndex = 5;
             this.textboxDurationIO.Text = "0";
             this.textboxDurationIO.TrailingIcon = null;
             // 
-            // pictureBoxGraphic
+            // chartProc
             // 
-            this.pictureBoxGraphic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBoxGraphic.Location = new System.Drawing.Point(27, 70);
-            this.pictureBoxGraphic.Name = "pictureBoxGraphic";
-            this.tableLayoutPanel1.SetRowSpan(this.pictureBoxGraphic, 6);
-            this.pictureBoxGraphic.Size = new System.Drawing.Size(483, 342);
-            this.pictureBoxGraphic.TabIndex = 6;
-            this.pictureBoxGraphic.TabStop = false;
+            chartArea2.AxisX.Title = "Длительность всех IO";
+            chartArea2.AxisY.Title = "Время выполнения";
+            chartArea2.Name = "ChartArea1";
+            this.chartProc.ChartAreas.Add(chartArea2);
+            this.chartProc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartProc.Location = new System.Drawing.Point(32, 77);
+            this.chartProc.Name = "chartProc";
+            this.chartProc.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
+            this.tableLayoutPanel1.SetRowSpan(this.chartProc, 6);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series2.LabelBackColor = System.Drawing.Color.White;
+            series2.LabelBorderColor = System.Drawing.Color.White;
+            series2.Name = "Process";
+            this.chartProc.Series.Add(series2);
+            this.chartProc.Size = new System.Drawing.Size(592, 378);
+            this.chartProc.TabIndex = 6;
+            this.chartProc.Text = "график";
+            // 
+            // textboxProbTask
+            // 
+            this.textboxProbTask.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textboxProbTask.Depth = 0;
+            this.textboxProbTask.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textboxProbTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textboxProbTask.Hint = "Вероятность задачи";
+            this.textboxProbTask.LeadingIcon = null;
+            this.textboxProbTask.Location = new System.Drawing.Point(659, 269);
+            this.textboxProbTask.MaxLength = 50;
+            this.textboxProbTask.MouseState = MaterialSkin.MouseState.OUT;
+            this.textboxProbTask.Multiline = false;
+            this.textboxProbTask.Name = "textboxProbTask";
+            this.textboxProbTask.Size = new System.Drawing.Size(148, 50);
+            this.textboxProbTask.TabIndex = 7;
+            this.textboxProbTask.Text = "0.5";
+            this.textboxProbTask.TrailingIcon = null;
+            // 
+            // textboxDurationTask
+            // 
+            this.textboxDurationTask.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textboxDurationTask.Depth = 0;
+            this.textboxDurationTask.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textboxDurationTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textboxDurationTask.Hint = "MAX TASK (c)";
+            this.textboxDurationTask.LeadingIcon = null;
+            this.textboxDurationTask.Location = new System.Drawing.Point(659, 333);
+            this.textboxDurationTask.MaxLength = 50;
+            this.textboxDurationTask.MouseState = MaterialSkin.MouseState.OUT;
+            this.textboxDurationTask.Multiline = false;
+            this.textboxDurationTask.Name = "textboxDurationTask";
+            this.textboxDurationTask.Size = new System.Drawing.Size(148, 50);
+            this.textboxDurationTask.TabIndex = 8;
+            this.textboxDurationTask.Text = "0";
+            this.textboxDurationTask.TrailingIcon = null;
+            // 
+            // textboxAvgTimeComplete
+            // 
+            this.textboxAvgTimeComplete.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tableLayoutPanel1.SetColumnSpan(this.textboxAvgTimeComplete, 2);
+            this.textboxAvgTimeComplete.Depth = 0;
+            this.textboxAvgTimeComplete.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textboxAvgTimeComplete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textboxAvgTimeComplete.Hint = "Среднее время выполнения задачи (c)";
+            this.textboxAvgTimeComplete.LeadingIcon = null;
+            this.textboxAvgTimeComplete.Location = new System.Drawing.Point(659, 397);
+            this.textboxAvgTimeComplete.MaxLength = 50;
+            this.textboxAvgTimeComplete.MouseState = MaterialSkin.MouseState.OUT;
+            this.textboxAvgTimeComplete.Multiline = false;
+            this.textboxAvgTimeComplete.Name = "textboxAvgTimeComplete";
+            this.textboxAvgTimeComplete.Size = new System.Drawing.Size(302, 50);
+            this.textboxAvgTimeComplete.TabIndex = 9;
+            this.textboxAvgTimeComplete.Text = "Не посчитано";
+            this.textboxAvgTimeComplete.TrailingIcon = null;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 550);
+            this.ClientSize = new System.Drawing.Size(1003, 603);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "MainForm";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGraphic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartProc)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -223,6 +300,9 @@ namespace os_multiprogramming
         private MaterialSkin.Controls.MaterialTextBox textboxTaskComplete;
         private MaterialSkin.Controls.MaterialTextBox textboxProbIO;
         private MaterialSkin.Controls.MaterialTextBox textboxDurationIO;
-        private System.Windows.Forms.PictureBox pictureBoxGraphic;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartProc;
+        private MaterialSkin.Controls.MaterialTextBox textboxDurationTask;
+        private MaterialSkin.Controls.MaterialTextBox textboxProbTask;
+        private MaterialSkin.Controls.MaterialTextBox textboxAvgTimeComplete;
     }
 }

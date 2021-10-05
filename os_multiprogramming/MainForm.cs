@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.IO;
 
 namespace os_multiprogramming
 {
@@ -19,6 +21,7 @@ namespace os_multiprogramming
         TaskQueqe taskQueqe;
         bool isRunning = false;
         DateTime start;
+
         TimeSpan span;
         int runningTask = -1;
 
@@ -35,7 +38,9 @@ namespace os_multiprogramming
             taskQueqe = new TaskQueqe();
 
             textboxDurationIO.Text = GlobalVars.MAXIMUM_DURATION_IO.ToString();
-            textboxProbIO.Text = GlobalVars.PROBABILITY_IO.ToString();
+            textboxDurationTask.Text = GlobalVars.MAXIMUM_DURATION.ToString();
+            textboxProbTask.Text = (100*GlobalVars.PROBABILITY_NEW_TASK).ToString() + '%';
+            textboxProbIO.Text = (100*GlobalVars.PROBABILITY_IO).ToString() + '%';
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -47,6 +52,7 @@ namespace os_multiprogramming
                 isRunning = true;
                 start = DateTime.Now;
                 workTimer.Enabled = true;
+                textboxAvgTimeComplete.Text = "Не посчитано";
             }
             else
             {
@@ -55,6 +61,18 @@ namespace os_multiprogramming
                 buttonStart.Text = "Старт";
                 isRunning = false;
                 textboxTimeWork.Text = span.Hours.ToString() + ':' + span.Minutes.ToString() + ':' + span.Seconds.ToString();
+                int avgTime = 0;
+                int n = taskQueqe.tasksCompleted.Count();
+                foreach (MyTask task in taskQueqe.tasksCompleted)
+                {
+                    avgTime += task.getTimeLive();
+                }
+                if (n > 0)
+                    textboxAvgTimeComplete.Text = (avgTime /= n).ToString();
+                else
+                    textboxAvgTimeComplete.Text = "Нет выполненых задач :(";
+                dump();
+
             }
 
         }
@@ -98,7 +116,9 @@ namespace os_multiprogramming
                             runningTask = -1;
                         taskQueqe.tasksCompleted.Add(task);
                         taskQueqe.tasksInWork.RemoveAt(i);
-                        
+                        Tuple<int, int> tuple = task.getProcTimesInfo();
+                        updateChart(new DataPoint(tuple.Item1, tuple.Item2));
+                        i -= 1;
                     }
                     i += 1;
                 }
@@ -125,6 +145,41 @@ namespace os_multiprogramming
                 {
                     MyTask task = new MyTask();
                     taskQueqe.tasksInWork.Add(task);
+                }
+            }
+        }
+
+        private void updateChart(DataPoint dp)
+        {
+            dp.Color = materialSkinManager.ColorScheme.AccentColor;
+            chartProc.Series[0].Points.Add(dp);
+        }
+
+        private void dump()
+        {
+            string filename = "dump_" + 
+                DateTime.Now.Day.ToString() + '.' +
+                DateTime.Now.Month.ToString() + '.' +
+                DateTime.Now.Year.ToString() + '_' +
+                DateTime.Now.Hour.ToString() + ':' +
+                DateTime.Now.Minute.ToString() + ':' +
+                DateTime.Now.Second.ToString() + ':' +
+                ".txt";
+            using (var sw = new StreamWriter(filename))
+            {
+                sw.WriteLine("Выполненные процессы:");
+                sw.WriteLine("---");
+                foreach (MyTask task in taskQueqe.tasksCompleted)
+                {
+                    sw.WriteLine(task.getDumpInfo());
+                    sw.WriteLine("---");
+                }
+                sw.WriteLine("Не выполненные процессы:");
+                sw.WriteLine("---");
+                foreach (MyTask task in taskQueqe.tasksInWork)
+                {
+                    sw.WriteLine(task.getDumpInfo());
+                    sw.WriteLine("---");
                 }
             }
         }
